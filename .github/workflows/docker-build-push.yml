@@ -19,10 +19,12 @@ jobs:
 
     steps:
       
-    - uses: actions/checkout@v2 # first action : checkout source code
-    - name: docker login
-      run: | # log into docker hub account
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD  
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD 
+          
     - name: Get current date # get the date of the build
       id: date
       run: echo "::set-output name=date::$(date +'%Y-%m-%d--%M-%S')"
